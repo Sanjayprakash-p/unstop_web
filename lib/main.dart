@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unstop_web/scroll.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,12 +38,12 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/',
           page: () => FirebaseAuth.instance.currentUser != null
-              ? const MyWidget()
+              ? ProfilePage()
               : const UserRegistrationScreen(),
         ),
         GetPage(
           name: '/MyWidget',
-          page: () => const MyWidget(),
+          page: () => ProfilePage(),
         ),
       ],
     );
@@ -194,8 +195,9 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                     contentPadding: const EdgeInsets.symmetric(
                                         vertical: 0.0, horizontal: 25.0),
                                     hintText: 'Name',
-                                    hintStyle: const TextStyle(
-                                        fontSize: 17.0, color: Colors.white),
+                                    hintStyle: TextStyle(
+                                        fontSize: 17.0,
+                                        color: Colors.white.withOpacity(0.5)),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                       borderSide: BorderSide.none,
@@ -250,8 +252,9 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                   contentPadding: const EdgeInsets.symmetric(
                                       vertical: 0.0, horizontal: 25.0),
                                   hintText: 'Email',
-                                  hintStyle: const TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
+                                  hintStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      color: Colors.white.withOpacity(0.5)),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30.0),
                                     borderSide: BorderSide.none,
@@ -305,8 +308,9 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                   contentPadding: const EdgeInsets.symmetric(
                                       vertical: 0.0, horizontal: 25.0),
                                   hintText: 'Password',
-                                  hintStyle: const TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
+                                  hintStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      color: Colors.white.withOpacity(0.5)),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30.0),
                                     borderSide: BorderSide.none,
@@ -361,8 +365,9 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                     contentPadding: const EdgeInsets.symmetric(
                                         vertical: 0.0, horizontal: 25.0),
                                     hintText: 'Academic Background',
-                                    hintStyle: const TextStyle(
-                                        fontSize: 17.0, color: Colors.white),
+                                    hintStyle: TextStyle(
+                                        fontSize: 17.0,
+                                        color: Colors.white.withOpacity(0.5)),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                       borderSide: BorderSide.none,
@@ -414,8 +419,9 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                     contentPadding: const EdgeInsets.symmetric(
                                         vertical: 0.0, horizontal: 25.0),
                                     hintText: 'Professional Experience',
-                                    hintStyle: const TextStyle(
-                                        fontSize: 17.0, color: Colors.white),
+                                    hintStyle: TextStyle(
+                                        fontSize: 17.0,
+                                        color: Colors.white.withOpacity(0.5)),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                       borderSide: BorderSide.none,
@@ -461,8 +467,9 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                     contentPadding: const EdgeInsets.symmetric(
                                         vertical: 0.0, horizontal: 25.0),
                                     hintText: 'Areas of Expertise',
-                                    hintStyle: const TextStyle(
-                                        fontSize: 17.0, color: Colors.white),
+                                    hintStyle: TextStyle(
+                                        fontSize: 17.0,
+                                        color: Colors.white.withOpacity(0.5)),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                       borderSide: BorderSide.none,
