@@ -128,12 +128,72 @@ class ProfilePage extends StatelessWidget {
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
+                                    Text('@sampleuser'),
                                     Text(
                                       '3d',
                                       style: TextStyle(fontSize: 15),
                                     ),
                                   ],
                                 ),
+                                Expanded(child: Text('')),
+                                PopupMenuButton<String>(
+                                  position: PopupMenuPosition.under,
+                                  onSelected: (value) {
+                                    if (value == 'copy_link') {
+                                      // Implement copy link logic
+                                    } else if (value == 'report_post') {
+                                      // Implement report post logic
+                                    } else if (value == 'inbox_chat') {
+                                      // Navigate to chat screen
+                                    }
+                                  },
+                                  itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                      value: 'copy_link',
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.content_copy,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color),
+                                          SizedBox(width: 10),
+                                          Text('Copy Link'),
+                                        ],
+                                      ),
+                                    ),
+                                    PopupMenuItem(
+                                      value: 'report_post',
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.flag,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color),
+                                          SizedBox(width: 10),
+                                          Text('Report Post'),
+                                        ],
+                                      ),
+                                    ),
+                                    PopupMenuItem(
+                                      value: 'inbox_chat',
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.chat,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color),
+                                          SizedBox(width: 10),
+                                          Text('Inbox Chat'),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                  child: IconButton(
+                                    icon: Icon(Icons.more_vert_rounded),
+                                    onPressed:
+                                        null, // Remove onPressed as PopupMenu handles it
+                                  ),
+                                )
                               ],
                             ),
                             SizedBox(height: 8),
@@ -159,24 +219,23 @@ class ProfilePage extends StatelessWidget {
                             //   ),
                             // ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Row(
                                   children: [
-                                    IconButton(
-                                      icon: Icon(Icons.thumb_up),
-                                      onPressed: () {
-                                        // Handle like button press
-                                      },
-                                    ),
+                                    LikeButton(
+                                      key: key,
+                                    )
                                   ],
                                 ),
+                                Gap(10),
                                 IconButton(
                                   icon: Icon(Icons.mode_comment),
                                   onPressed: () {
                                     // Handle comment button press
                                   },
                                 ),
+                                Gap(10),
                                 IconButton(
                                   icon: Icon(Icons.share),
                                   onPressed: () {
@@ -184,7 +243,8 @@ class ProfilePage extends StatelessWidget {
                                   },
                                 ),
                               ],
-                            )
+                            ),
+                            TextField()
                           ],
                         ),
                       ),
@@ -207,6 +267,53 @@ class ProfilePage extends StatelessWidget {
         },
         tooltip: 'Update Profile',
         child: Icon(Icons.edit),
+      ),
+    );
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  const LikeButton({Key? key}) : super(key: key);
+
+  @override
+  State<LikeButton> createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+      duration: const Duration(milliseconds: 200), vsync: this, value: 1.0);
+
+  bool _isFavorite = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _isFavorite = !_isFavorite;
+        });
+        _controller.reverse().then((value) => _controller.forward());
+      },
+      child: ScaleTransition(
+        scale: Tween(begin: 0.7, end: 1.0).animate(
+            CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+        child: _isFavorite
+            ? const Icon(
+                Icons.favorite,
+                size: 30,
+                color: Colors.red,
+              )
+            : const Icon(
+                Icons.favorite_border,
+                size: 30,
+              ),
       ),
     );
   }
