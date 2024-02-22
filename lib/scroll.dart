@@ -12,6 +12,7 @@ class ProfileController extends GetxController {
 }
 
 bool comment = false;
+bool _showPostButton = false;
 
 class Post {
   final String title;
@@ -236,6 +237,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   onTap: () {
                                     setState(() {
                                       comment = !comment;
+                                      if (!comment) _showEmojiPicker = false;
                                     });
                                   },
                                   child: const Row(
@@ -260,7 +262,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             comment
                                 ? Row(
                                     children: [
-                                      const CircleAvatar(
+                                      CircleAvatar(
                                         backgroundImage:
                                             AssetImage('assets/1.jpg'),
                                       ),
@@ -272,24 +274,38 @@ class _ProfilePageState extends State<ProfilePage> {
                                             controller: emoji,
                                             expands: false,
                                             decoration: InputDecoration(
-                                                suffixIcon: IconButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        _showEmojiPicker =
-                                                            !_showEmojiPicker;
-                                                      });
-                                                    },
-                                                    icon: const Icon(
-                                                        Icons.emoji_emotions)),
-
-                                                // Remove onPressed as PopupMenu handles it
-
-                                                hintText: 'Add a comment',
-                                                border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            32))),
+                                              suffixIcon: IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _showEmojiPicker =
+                                                        !_showEmojiPicker;
+                                                  });
+                                                },
+                                                icon: const Icon(
+                                                    Icons.emoji_emotions),
+                                              ),
+                                              hintText: 'Add a comment',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(32),
+                                              ),
+                                            ),
+                                            onChanged: (text) {
+                                              setState(() {
+                                                _showPostButton =
+                                                    text.isNotEmpty;
+                                              });
+                                            },
                                           ),
+                                        ),
+                                      ),
+                                      Visibility(
+                                        visible: _showPostButton,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            // Implement your post logic here
+                                          },
+                                          child: const Text('Post'),
                                         ),
                                       ),
                                     ],
