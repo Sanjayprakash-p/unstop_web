@@ -1,4 +1,4 @@
-import 'dart:js_util';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -11,6 +11,8 @@ class ProfileController extends GetxController {
   var profileDescription = 'Passionate about building great software.'.obs;
 }
 
+bool comment = false;
+
 class Post {
   final String title;
   final String content;
@@ -18,7 +20,17 @@ class Post {
   Post(this.title, this.content);
 }
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+bool _showEmojiPicker = false;
+TextEditingController emoji = TextEditingController();
+
+class _ProfilePageState extends State<ProfilePage> {
   final ProfileController profileController = Get.put(ProfileController());
 
   final List<Post> posts = [
@@ -48,7 +60,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Page'),
+        title: const Text('Profile Page'),
       ),
       body: Center(
         child: SizedBox(
@@ -58,7 +70,7 @@ class ProfilePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Card(
-                  margin: EdgeInsets.all(16),
+                  margin: const EdgeInsets.all(16),
                   elevation: 4,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -72,27 +84,28 @@ class ProfilePage extends StatelessWidget {
                                 profileController.profileImage.value),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Obx(
                           () => Text(
                             profileController.profileName.value,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Obx(
                           () => Text(
                             profileController.profileTitle.value,
-                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.grey),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Obx(
                           () => Text(
                             profileController.profileDescription.value,
                             textAlign: TextAlign.left,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ),
                       ],
@@ -101,12 +114,12 @@ class ProfilePage extends StatelessWidget {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: posts.length,
                   itemBuilder: (context, index) {
                     return Card(
                       color: Colors.white,
-                      margin: EdgeInsets.all(8),
+                      margin: const EdgeInsets.all(8),
                       elevation: 4,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -115,27 +128,27 @@ class ProfilePage extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                CircleAvatar(
+                                const CircleAvatar(
                                   backgroundImage: AssetImage('assets/1.jpg'),
                                 ),
-                                Gap(10),
+                                const Gap(10),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       posts[index].title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text('@sampleuser'),
-                                    Text(
+                                    const Text('@sampleuser'),
+                                    const Text(
                                       '3d',
                                       style: TextStyle(fontSize: 15),
                                     ),
                                   ],
                                 ),
-                                Expanded(child: Text('')),
+                                const Expanded(child: Text('')),
                                 PopupMenuButton<String>(
                                   position: PopupMenuPosition.under,
                                   onSelected: (value) {
@@ -156,8 +169,8 @@ class ProfilePage extends StatelessWidget {
                                               color: Theme.of(context)
                                                   .iconTheme
                                                   .color),
-                                          SizedBox(width: 10),
-                                          Text('Copy Link'),
+                                          const SizedBox(width: 10),
+                                          const Text('Copy Link'),
                                         ],
                                       ),
                                     ),
@@ -169,8 +182,8 @@ class ProfilePage extends StatelessWidget {
                                               color: Theme.of(context)
                                                   .iconTheme
                                                   .color),
-                                          SizedBox(width: 10),
-                                          Text('Report Post'),
+                                          const SizedBox(width: 10),
+                                          const Text('Report Post'),
                                         ],
                                       ),
                                     ),
@@ -182,13 +195,13 @@ class ProfilePage extends StatelessWidget {
                                               color: Theme.of(context)
                                                   .iconTheme
                                                   .color),
-                                          SizedBox(width: 10),
-                                          Text('Inbox Chat'),
+                                          const SizedBox(width: 10),
+                                          const Text('Inbox Chat'),
                                         ],
                                       ),
                                     ),
                                   ],
-                                  child: IconButton(
+                                  child: const IconButton(
                                     icon: Icon(Icons.more_vert_rounded),
                                     onPressed:
                                         null, // Remove onPressed as PopupMenu handles it
@@ -196,10 +209,10 @@ class ProfilePage extends StatelessWidget {
                                 )
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               posts[index].content,
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             ),
                             SizedBox(
                               width: double.infinity,
@@ -211,40 +224,91 @@ class ProfilePage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(horizontal: 15),
-                            //   child: Divider(
-                            //     color: Colors.black54,
-                            //   ),
-                            // ),
+                            const Gap(10),
                             Row(
                               // mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Row(
-                                  children: [
-                                    LikeButton(
-                                      key: key,
-                                    )
-                                  ],
+                                const Row(
+                                  children: [LikeButton(), Text(' Like')],
                                 ),
-                                Gap(10),
-                                IconButton(
-                                  icon: Icon(Icons.mode_comment),
-                                  onPressed: () {
-                                    // Handle comment button press
+                                const Gap(10),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      comment = !comment;
+                                    });
                                   },
+                                  child: const Row(
+                                    children: [
+                                      Icon(Icons.comment_rounded),
+                                      Text('Comment')
+                                    ],
+                                  ),
                                 ),
-                                Gap(10),
-                                IconButton(
-                                  icon: Icon(Icons.share),
-                                  onPressed: () {
-                                    // Handle share button press
-                                  },
+                                const Gap(10),
+                                InkWell(
+                                  onTap: () {},
+                                  child: const Row(
+                                    children: [
+                                      Icon(Icons.share),
+                                      Text('Share')
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                            TextField()
+                            comment
+                                ? Row(
+                                    children: [
+                                      const CircleAvatar(
+                                        backgroundImage:
+                                            AssetImage('assets/1.jpg'),
+                                      ),
+                                      const Gap(10),
+                                      Expanded(
+                                        child: SizedBox(
+                                          height: 50,
+                                          child: TextField(
+                                            controller: emoji,
+                                            expands: false,
+                                            decoration: InputDecoration(
+                                                suffixIcon: IconButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        _showEmojiPicker =
+                                                            !_showEmojiPicker;
+                                                      });
+                                                    },
+                                                    icon: const Icon(
+                                                        Icons.emoji_emotions)),
+
+                                                // Remove onPressed as PopupMenu handles it
+
+                                                hintText: 'Add a comment',
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            32))),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : const SizedBox(),
+                            _showEmojiPicker
+                                ? SizedBox(
+                                    height: 250,
+                                    child: EmojiPicker(
+                                      onEmojiSelected: (category, emoj) {
+                                        // Append the selected emoji to the text field
+                                        emoji.text = emoji.text + emoj.emoji;
+                                        setState(() {
+                                          _showEmojiPicker = false;
+                                        });
+                                      },
+                                    ),
+                                  )
+                                : const SizedBox(),
                           ],
                         ),
                       ),
@@ -266,7 +330,7 @@ class ProfilePage extends StatelessWidget {
           profileController.profileImage.value = 'assets/images/raster/man.png';
         },
         tooltip: 'Update Profile',
-        child: Icon(Icons.edit),
+        child: const Icon(Icons.edit),
       ),
     );
   }
