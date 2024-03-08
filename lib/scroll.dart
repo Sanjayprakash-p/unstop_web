@@ -3,6 +3,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:unstop_web/add.dart';
 
 class ProfileController extends GetxController {
   var profileImage = 'assets/profile_image.jpg'.obs;
@@ -344,6 +345,9 @@ class _ProfilePageState extends State<ProfilePage> {
           profileController.profileDescription.value =
               'Passionate about creating intuitive user experiences.';
           profileController.profileImage.value = 'assets/images/raster/man.png';
+
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: ((context) => const Add_page())));
         },
         tooltip: 'Update Profile',
         child: const Icon(Icons.edit),

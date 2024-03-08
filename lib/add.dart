@@ -1,5 +1,7 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:lottie/lottie.dart';
 
 class Add_page extends StatefulWidget {
   const Add_page({super.key});
@@ -84,6 +86,7 @@ class _Add_pageState extends State<Add_page> {
               ),
               Gap(20),
               TextFormField(
+                // cursorHeight: 15,
                 maxLines: 3,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.black,
@@ -103,8 +106,8 @@ class _Add_pageState extends State<Add_page> {
                   //   color: Colors.white,
                   // ),
                   constraints: const BoxConstraints(maxWidth: 600),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 0.0, horizontal: 25.0),
+                  // contentPadding: const EdgeInsets.symmetric(
+                  //     vertical: 0.0, horizontal: 25.0),
                   hintText: 'Description',
                   //  'Title',
                   hintStyle:
@@ -160,6 +163,22 @@ class _Add_pageState extends State<Add_page> {
                 ),
               ),
               Text('Required skills'),
+              DottedBorder(
+                color: Colors.black,
+                strokeWidth: 1,
+                child:
+                    // LottieBuilder.asset(
+                    //     '/Users/rajavikas/My_space/GitHub_repo/unstop_web/assets/heart.json'),
+                    Image.asset(
+                  '/Users/rajavikas/My_space/GitHub_repo/unstop_web/assets/place_holder.jpeg',
+                  width: 148,
+                  height: 148,
+                ),
+                // FlutterLogo(
+                //   size: 148,
+                //   textColor: Colors.black45,
+                // ),
+              )
             ],
           ),
         ),
@@ -204,23 +223,23 @@ class _textformfieldState extends State<textformfield> {
         //  'Title',
         hintStyle: const TextStyle(fontSize: 17.0, color: Colors.white),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(20.0),
           borderSide: BorderSide.none,
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(20.0),
           borderSide: const BorderSide(color: Colors.red),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(20.0),
           borderSide: const BorderSide(color: Colors.transparent),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(20.0),
           borderSide: BorderSide.none,
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(20.0),
           borderSide: BorderSide.none,
         ),
         filled: true,
