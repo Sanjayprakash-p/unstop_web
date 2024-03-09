@@ -18,7 +18,7 @@ class _Add_pageState extends State<Add_page> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const Center(child: Text('Add Page')),
+              Center(child: Text('Add Page')),
               Gap(20),
               SizedBox(
                 width: 400,
@@ -169,16 +169,25 @@ class _Add_pageState extends State<Add_page> {
                 child:
                     // LottieBuilder.asset(
                     //     '/Users/rajavikas/My_space/GitHub_repo/unstop_web/assets/heart.json'),
-                    Image.asset(
-                  '/Users/rajavikas/My_space/GitHub_repo/unstop_web/assets/place_holder.jpeg',
-                  width: 148,
-                  height: 148,
+                    InkWell(
+                  onTap: () {
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: ((context) => Add_image())));
+                  },
+                  child: Image.asset(
+                    '/Users/rajavikas/My_space/GitHub_repo/unstop_web/assets/place_holder.jpeg',
+                    width: 148,
+                    height: 148,
+                  ),
                 ),
                 // FlutterLogo(
                 //   size: 148,
                 //   textColor: Colors.black45,
                 // ),
-              )
+              ),
+              ElevatedButton(onPressed: () {}, child: Text('Done!')),
             ],
           ),
         ),
