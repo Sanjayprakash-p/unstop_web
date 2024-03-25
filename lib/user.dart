@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -64,7 +65,8 @@ class user_Profile extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              SizedBox(height: 8.0),
+              // SizedBox(height: 8.0),
+              Gap(8),
               Text(
                 user.connections,
                 style: TextStyle(
